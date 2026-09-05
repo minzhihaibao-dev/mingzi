@@ -1,688 +1,598 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
-
+<html lang="en">
 <head>
-
-<meta charset="UTF-8">
-<meta name="viewport" content="width=device-width, initial-scale=1.0">
-
-<title>MINGZI Maison</title>
-
-
-<style>
-
-
-*{
-margin:0;
-padding:0;
-box-sizing:border-box;
-font-family:"Helvetica Neue","PingFang SC",sans-serif;
-}
-
-
-body{
-
-background:#0d0d0d;
-color:#fff;
-
-}
-
-
-/* 导航 */
-
-header{
-
-height:90px;
-
-display:flex;
-
-align-items:center;
-
-justify-content:space-between;
-
-padding:0 90px;
-
-position:absolute;
-
-width:100%;
-
-z-index:10;
-
-}
-
-
-.logo{
-
-font-size:38px;
-
-letter-spacing:18px;
-
-font-weight:300;
-
-}
-
-
-nav a{
-
-color:white;
-
-text-decoration:none;
-
-margin-left:45px;
-
-font-size:14px;
-
-letter-spacing:3px;
-
-}
-
-
-
-/* 首屏 */
-
-.hero{
-
-height:100vh;
-
-background:
-
-linear-gradient(
-rgba(0,0,0,.25),
-rgba(0,0,0,.45)
-),
-
-url("https://images.unsplash.com/photo-1584917865442-de89df76afd3")
-
-center/cover;
-
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-text-align:center;
-
-}
-
-
-
-.hero h1{
-
-font-size:100px;
-
-font-weight:200;
-
-letter-spacing:35px;
-
-
-}
-
-
-
-.hero p{
-
-margin-top:40px;
-
-font-size:20px;
-
-letter-spacing:10px;
-
-}
-
-
-
-.button{
-
-display:inline-block;
-
-margin-top:60px;
-
-padding:18px 70px;
-
-border:1px solid rgba(255,255,255,.6);
-
-color:white;
-
-text-decoration:none;
-
-letter-spacing:5px;
-
-}
-
-
-
-
-/* 产品 */
-
-.section{
-
-padding:140px 100px;
-
-}
-
-
-
-.title{
-
-text-align:center;
-
-font-size:45px;
-
-font-weight:300;
-
-letter-spacing:15px;
-
-margin-bottom:80px;
-
-}
-
-
-
-.product{
-
-display:grid;
-
-grid-template-columns:1fr 1fr;
-
-align-items:center;
-
-gap:80px;
-
-}
-
-
-
-.product img{
-
-width:100%;
-
-height:700px;
-
-object-fit:cover;
-
-}
-
-
-
-.product h2{
-
-font-size:45px;
-
-font-weight:300;
-
-letter-spacing:8px;
-
-}
-
-
-
-.product h3{
-
-margin-top:30px;
-
-font-size:18px;
-
-font-weight:300;
-
-color:#c9b27c;
-
-letter-spacing:5px;
-
-}
-
-
-.product p{
-
-margin-top:40px;
-
-line-height:2.2;
-
-font-size:18px;
-
-color:#ddd;
-
-}
-
-
-
-.price{
-
-margin-top:50px;
-
-font-size:28px;
-
-letter-spacing:5px;
-
-}
-
-
-
-/* 工艺 */
-
-
-.craft{
-
-background:#151515;
-
-padding:150px 20%;
-
-text-align:center;
-
-}
-
-
-
-.craft h2{
-
-font-size:50px;
-
-font-weight:300;
-
-letter-spacing:12px;
-
-}
-
-
-
-.craft p{
-
-margin-top:50px;
-
-line-height:2.5;
-
-font-size:18px;
-
-color:#ccc;
-
-}
-
-
-
-/* 女性 */
-
-
-.women{
-
-height:800px;
-
-background:
-
-linear-gradient(
-rgba(0,0,0,.2),
-rgba(0,0,0,.6)
-),
-
-url("https://images.unsplash.com/photo-1483985988355-763728e1935b")
-
-center/cover;
-
-
-display:flex;
-
-align-items:center;
-
-justify-content:center;
-
-text-align:center;
-
-}
-
-
-.women h2{
-
-font-size:55px;
-
-font-weight:300;
-
-letter-spacing:12px;
-
-}
-
-
-
-/* 会员 */
-
-
-.club{
-
-padding:130px;
-
-text-align:center;
-
-background:#111;
-
-}
-
-
-.club h2{
-
-font-size:45px;
-
-letter-spacing:10px;
-
-font-weight:300;
-
-}
-
-
-
-.club p{
-
-margin-top:40px;
-
-line-height:2.5;
-
-color:#ccc;
-
-}
-
-
-
-/* footer */
-
-
-footer{
-
-padding:50px;
-
-text-align:center;
-
-background:#000;
-
-color:#777;
-
-letter-spacing:5px;
-
-}
-
-
-
-
-@media(max-width:900px){
-
-
-header{
-
-padding:0 20px;
-
-}
-
-
-nav{
-
-display:none;
-
-}
-
-
-.hero h1{
-
-font-size:45px;
-
-letter-spacing:15px;
-
-}
-
-
-.section{
-
-padding:70px 25px;
-
-}
-
-
-.product{
-
-grid-template-columns:1fr;
-
-}
-
-
-.product img{
-
-height:450px;
-
-}
-
-
-
-}
-
-
-
-</style>
-
-
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MINGZI — Maison Zoria | Official Global Store</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg-color: #0c0c0c;
+            --text-main: #f5f4f0;
+            --text-muted: #8c8c8c;
+            --accent-gold: #c5b358;
+            --border-subtle: rgba(255, 255, 255, 0.12);
+            --card-bg: #141414;
+        }
+
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+        }
+
+        body {
+            background-color: var(--bg-color);
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            font-weight: 300;
+            letter-spacing: 0.05em;
+            line-height: 1.6;
+            overflow-x: hidden;
+        }
+
+        h1, h2, h3, .serif-font {
+            font-family: 'Cormorant Garamond', serif;
+            font-weight: 400;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 2rem 4rem;
+            background: rgba(12, 12, 12, 0.85);
+            backdrop-filter: blur(10px);
+            z-index: 1000;
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .nav-links, .nav-right {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+        }
+
+        .nav-links a, .nav-right a {
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover, .nav-right a:hover {
+            color: var(--accent-gold);
+        }
+
+        .logo {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem;
+            letter-spacing: 0.3em;
+            text-transform: uppercase;
+            text-decoration: none;
+            color: var(--text-main);
+        }
+
+        /* Hero Section */
+        header.hero {
+            height: 100vh;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            padding: 0 1rem;
+            background: linear-gradient(rgba(12,12,12,0.4), rgba(12,12,12,0.8)), url('https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
+        }
+
+        .hero-overline {
+            font-size: 0.7rem;
+            letter-spacing: 0.4em;
+            text-transform: uppercase;
+            color: var(--accent-gold);
+            margin-bottom: 1.5rem;
+        }
+
+        .hero h1 {
+            font-size: clamp(3rem, 6vw, 5.5rem);
+            line-height: 1.1;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.02em;
+        }
+
+        .hero p {
+            max-width: 600px;
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            margin-bottom: 2.5rem;
+            line-height: 1.8;
+        }
+
+        .btn {
+            display: inline-block;
+            padding: 1rem 2.5rem;
+            border: 1px solid var(--text-main);
+            color: var(--text-main);
+            text-decoration: none;
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.25em;
+            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            background: transparent;
+        }
+
+        .btn:hover {
+            background: var(--text-main);
+            color: var(--bg-color);
+            border-color: var(--text-main);
+        }
+
+        /* Manifesto Section */
+        section.manifesto {
+            padding: 10rem 2rem;
+            max-width: 800px;
+            margin: 0 auto;
+            text-align: center;
+        }
+
+        section.manifesto h2 {
+            font-size: clamp(2rem, 3.5vw, 3rem);
+            margin-bottom: 2rem;
+            letter-spacing: 0.05em;
+        }
+
+        section.manifesto p {
+            font-size: 1.05rem;
+            color: var(--text-muted);
+            line-height: 2;
+        }
+
+        /* Collections Grid */
+        section.collection {
+            padding: 6rem 4rem;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+
+        .section-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+            margin-bottom: 4rem;
+            border-bottom: 1px solid var(--border-subtle);
+            padding-bottom: 1.5rem;
+        }
+
+        .section-header h2 {
+            font-size: 2.2rem;
+            letter-spacing: 0.05em;
+        }
+
+        .section-header span {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            text-transform: uppercase;
+        }
+
+        .product-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 3rem;
+        }
+
+        .product-card {
+            background: var(--card-bg);
+            border: 1px solid var(--border-subtle);
+            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .product-card:hover {
+            transform: translateY(-8px);
+        }
+
+        .product-image {
+            height: 480px;
+            width: 100%;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .product-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+        }
+
+        .product-card:hover .product-image img {
+            transform: scale(1.04);
+        }
+
+        .product-badge {
+            position: absolute;
+            top: 1.5rem;
+            right: 1.5rem;
+            background: rgba(12, 12, 12, 0.7);
+            backdrop-filter: blur(5px);
+            padding: 0.4rem 0.8rem;
+            font-size: 0.65rem;
+            letter-spacing: 0.15em;
+            text-transform: uppercase;
+            border: 1px solid var(--border-subtle);
+        }
+
+        .product-info {
+            padding: 2.5rem;
+        }
+
+        .product-category {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            color: var(--accent-gold);
+            text-transform: uppercase;
+            margin-bottom: 0.8rem;
+        }
+
+        .product-info h3 {
+            font-size: 1.6rem;
+            margin-bottom: 1rem;
+        }
+
+        .product-desc {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 1.5rem;
+            line-height: 1.7;
+        }
+
+        .product-footer {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 1.5rem;
+        }
+
+        .price {
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.4rem;
+            letter-spacing: 0.05em;
+        }
+
+        .price-rmb {
+            font-size: 0.7rem;
+            color: var(--text-muted);
+            font-family: 'Montserrat', sans-serif;
+            display: block;
+        }
+
+        .product-link {
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            color: var(--text-main);
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .product-link:hover {
+            color: var(--accent-gold);
+        }
+
+        /* Atelier Craftsmanship Section */
+        section.atelier {
+            padding: 8rem 4rem;
+            background: #111;
+            border-top: 1px solid var(--border-subtle);
+            border-bottom: 1px solid var(--border-subtle);
+        }
+
+        .atelier-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 5rem;
+            align-items: center;
+        }
+
+        .atelier-text h2 {
+            font-size: 2.5rem;
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .atelier-text p {
+            font-size: 0.95rem;
+            color: var(--text-muted);
+            line-height: 1.9;
+            margin-bottom: 2rem;
+        }
+
+        .atelier-image {
+            height: 500px;
+            width: 100%;
+        }
+
+        .atelier-image img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+
+        /* Footer */
+        footer {
+            padding: 6rem 4rem 4rem 4rem;
+            background: var(--bg-color);
+            border-top: 1px solid var(--border-subtle);
+        }
+
+        .footer-grid {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: 2fr 1fr 1fr 1.5fr;
+            gap: 4rem;
+            margin-bottom: 5rem;
+        }
+
+        .footer-col h4 {
+            font-size: 0.75rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            color: var(--accent-gold);
+        }
+
+        .footer-col ul {
+            list-style: none;
+        }
+
+        .footer-col ul li {
+            margin-bottom: 0.8rem;
+        }
+
+        .footer-col ul li a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.85rem;
+            transition: color 0.3s;
+        }
+
+        .footer-col ul li a:hover {
+            color: var(--text-main);
+        }
+
+        .newsletter-form {
+            display: flex;
+            margin-top: 1rem;
+            border-bottom: 1px solid var(--text-main);
+            padding-bottom: 0.5rem;
+        }
+
+        .newsletter-form input {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            font-family: 'Montserrat', sans-serif;
+            font-size: 0.85rem;
+            outline: none;
+            width: 100%;
+        }
+
+        .newsletter-form button {
+            background: transparent;
+            border: none;
+            color: var(--text-main);
+            text-transform: uppercase;
+            font-size: 0.7rem;
+            letter-spacing: 0.2em;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .newsletter-form button:hover {
+            color: var(--accent-gold);
+        }
+
+        .footer-bottom {
+            max-width: 1400px;
+            margin: 0 auto;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            border-top: 1px solid var(--border-subtle);
+            padding-top: 2rem;
+            font-size: 0.75rem;
+            color: var(--text-muted);
+        }
+
+        /* Responsive Design */
+        @media (max-width: 900px) {
+            nav { padding: 1.5rem 2rem; }
+            .nav-links { display: none; }
+            .atelier-container { grid-template-columns: 1fr; gap: 3rem; }
+            .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
+            section.collection { padding: 4rem 1.5rem; }
+        }
+
+        @media (max-width: 600px) {
+            .footer-grid { grid-template-columns: 1fr; }
+        }
+    </style>
 </head>
-
-
-
 <body>
 
-
-
-<header>
-
-
-<div class="logo">
-MINGZI
-</div>
-
-
-<nav>
-
-<a href="#">
-COLLECTION
-</a>
-
-<a href="#">
-CRAFT
-</a>
-
-<a href="#">
-MAISON
-</a>
-
-
-</nav>
-
-
-</header>
-
-
-
-
-
-<section class="hero">
-
-
-<div>
-
-
-<h1>
-MINGZI
-</h1>
-
-
-<p>
-THE ART OF EVERYDAY LUXURY
-</p>
-
-
-<a class="button">
-DISCOVER
-</a>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<section class="section">
-
-
-<h2 class="title">
-COLLECTION
-</h2>
-
-
-<div class="product">
-
-
-<img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3">
-
-
-<div>
-
-
-<h2>
-CLOUD MOON BAG
-</h2>
-
-
-<h3>
-云朵星月手提包
-</h3>
-
-
-
-<p>
-
-以建筑美学重新诠释女性手袋。
-
-柔和轮廓，
-结合精密结构设计。
-
-每一个细节，
-都为了多年后的收藏价值。
-
-</p>
-
-
-
-<div class="price">
-
-¥28,500
-
-</div>
-
-
-
-</div>
-
-
-</div>
-
-
-</section>
-
-
-
-
-
-
-<section class="craft">
-
-
-<h2>
-CRAFTSMANSHIP
-</h2>
-
-
-
-<p>
-
-从精选皮料，
-到五金雕刻，
-再到每一次边缘处理。
-
-MINGZI相信真正的奢华，
-来自看不见的细节。
-
-时间会证明，
-一件作品是否值得收藏。
-
-</p>
-
-
-</section>
-
-
-
-
-
-
-<section class="women">
-
-
-<h2>
-
-FOR WOMEN
-WHO DEFINE THEMSELVES
-
-</h2>
-
-
-</section>
-
-
-
-
-
-
-<section class="club">
-
-
-<h2>
-MINGZI PRIVATE CLUB
-</h2>
-
-
-<p>
-
-私人会员体验
-
-<br>
-
-新品提前鉴赏
-
-<br>
-
-限定作品收藏
-
-<br>
-
-专属品牌服务
-
-</p>
-
-
-</section>
-
-
-
-
-<footer>
-
-MINGZI MAISON
-
-<br><br>
-
-ART · DESIGN · LUXURY
-
-</footer>
-
-
-
+    <!-- Navigation Bar -->
+    <nav>
+        <ul class="nav-links">
+            <li><a href="#collections">Collections</a></li>
+            <li><a href="#atelier">Atelier</a></li>
+            <li><a href="#heritage">Heritage</a></li>
+        </ul>
+        <a href="#" class="logo">MINGZI</a>
+        <ul class="nav-right">
+            <li><a href="#">USD ($)</a></li>
+            <li><a href="#">Search</a></li>
+            <li><a href="#">Bag (0)</a></li>
+        </ul>
+    </nav>
+
+    <!-- Hero Section -->
+    <header class="hero">
+        <span class="hero-overline">Maison Zoria — Est. MMXXI</span>
+        <h1>The Architecture of Silence.</h1>
+        <p>Uncompromising craft. Sculpted in limited numbered iterations using Tuscan vegetable-tanned hides and lost-wax cast precious metals. Designed for those who command a room without speaking.</p>
+        <a href="#collections" class="btn">Explore Editions</a>
+    </header>
+
+    <!-- Brand Manifesto -->
+    <section class="manifesto">
+        <h2>Anti-Ostentation.</h2>
+        <p>In an era of manufactured noise, true luxury is quiet, deliberate, and scarce. Every MINGZI creation is hand-finished in our atelier by master artisans who spend upwards of forty hours shaping a single silhouette. No visible mass logos. No seasonal compromises. Only pure form, sublime tactility, and absolute structural integrity.</p>
+    </section>
+
+    <!-- Product Collections -->
+    <section class="collection" id="collections">
+        <div class="section-header">
+            <h2>Current Editions</h2>
+            <span>Numbered Allocations</span>
+        </div>
+
+        <div class="product-grid">
+            
+            <!-- Item 1: Petite / Evening (Approx 48,300 RMB -> $6,800 USD) -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000&auto=format&fit=crop" alt="L'Ombre de Nuit">
+                    <div class="product-badge">Edition of 30</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Petite & Evening</div>
+                    <h3>L'Ombre de Nuit</h3>
+                    <p class="product-desc">Architectural flap silhouette in Toscana black calfskin, anchored by an integrated custom magnetic closure and hand-painted edges.</p>
+                    <div class="product-footer">
+                        <div>
+                            <span class="price">$6,800.00</span>
+                            <span class="price-rmb">≈ ¥48,300 CNY</span>
+                        </div>
+                        <a href="#" class="product-link">Inquire →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 2: Grand Tote & Day (Approx 103,000 RMB -> $14,500 USD) -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=1000&auto=format&fit=crop" alt="Le Grand Silence">
+                    <div class="product-badge">Atelier Reserve</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Grand Tote & Day</div>
+                    <h3>Le Grand Silence</h3>
+                    <p class="product-desc">An effortless daily carrier engineered with unlined double-face saddle brown calfskin, celebrating the pure texture of full-grain hides.</p>
+                    <div class="product-footer">
+                        <div>
+                            <span class="price">$14,500.00</span>
+                            <span class="price-rmb">≈ ¥103,000 CNY</span>
+                        </div>
+                        <a href="#" class="product-link">Inquire →</a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Item 3: Haute Atelier / Bespoke (Approx 202,300 RMB -> $28,500 USD) -->
+            <div class="product-card">
+                <div class="product-image">
+                    <img src="https://images.unsplash.com/photo-1594223274512-ad480373982c?q=80&w=1000&auto=format&fit=crop" alt="The Monolith Bespoke">
+                    <div class="product-badge">Numbered 1 of 15</div>
+                </div>
+                <div class="product-info">
+                    <div class="product-category">Haute Atelier</div>
+                    <h3>The Monolith Collector's Edition</h3>
+                    <p class="product-desc">Hand-waxed forest green lambskin featuring custom lost-wax cast 18k gold-plated brass hardware and artisan serial registration.</p>
+                    <div class="product-footer">
+                        <div>
+                            <span class="price">$28,500.00</span>
+                            <span class="price-rmb">≈ ¥202,300 CNY</span>
+                        </div>
+                        <a href="#" class="product-link">Private Allocation →</a>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </section>
+
+    <!-- Atelier Craftsmanship Section -->
+    <section class="atelier" id="atelier">
+        <div class="atelier-container">
+            <div class="atelier-text">
+                <h2>The Art of Restraint.</h2>
+                <p>Sourced from multi-generational tanneries in Tuscany, our hides are drum-dyed and naturally tumbled to preserve the skin's living organic structure. Every piece evolves gracefully, developing a rich patina over decades of wear.</p>
+                <p>Eschewing industrial stamping, each metal hardware component begins as a hand-sculpted wax model, cast in solid brass, and polished manually to a liquid mirror finish.</p>
+                <a href="#" class="btn">Discover Our Process</a>
+            </div>
+            <div class="atelier-image">
+                <img src="https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=1000&auto=format&fit=crop" alt="Atelier Craftsmanship">
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-grid">
+            <div class="footer-col">
+                <a href="#" class="logo" style="display: inline-block; margin-bottom: 1.5rem;">MINGZI</a>
+                <p style="color: var(--text-muted); font-size: 0.85rem; max-width: 300px; line-height: 1.7;">
+                    Paris &middot; Xiamen &middot; New York<br>The definitive statement in quiet luxury and bespoke leather goods.
+                </p>
+            </div>
+            <div class="footer-col">
+                <h4>Atelier</h4>
+                <ul>
+                    <li><a href="#">Private Appointments</a></li>
+                    <li><a href="#">Bespoke Commissions</a></li>
+                    <li><a href="#">Lost-Wax Casting</a></li>
+                    <li><a href="#">Material Index</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Client Care</h4>
+                <ul>
+                    <li><a href="#">Global Insured Shipping</a></li>
+                    <li><a href="#">White-Glove Maintenance</a></li>
+                    <li><a href="#">Authentication</a></li>
+                    <li><a href="#">Concierge Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-col">
+                <h4>Private Journal</h4>
+                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1rem;">Receive private invitations to seasonal releases and archival drops.</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault();">
+                    <input type="email" placeholder="Enter your email address">
+                    <button type="submit">Join</button>
+                </form>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2026 MINGZI Maison Zoria. All Rights Reserved.</p>
+            <div style="display: flex; gap: 2rem;">
+                <a href="#" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
+                <a href="#" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
+            </div>
+        </div>
+    </footer>
 
 </body>
-
 </html>
