@@ -1,598 +1,1132 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MINGZI — Maison Zoria | Official Global Store</title>
+    <title>Maison Zoria | 铭兹世家高定珠宝与皮具</title>
+    <!-- 引入 Google Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,400&family=Montserrat:wght@200;300;400;500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Noto+Serif+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
     <style>
+        /* ================= 1. 核心紫色星空顶配色 ================= */
         :root {
-            --bg-color: #0c0c0c;
-            --text-main: #f5f4f0;
-            --text-muted: #8c8c8c;
-            --accent-gold: #c5b358;
-            --border-subtle: rgba(255, 255, 255, 0.12);
-            --card-bg: #141414;
+            --bg-deep-space: #07040d;
+            --purple-glow: rgba(147, 51, 234, 0.35);
+            --gold-primary: #dfb36e;
+            --gold-light: #fbe3b5;
+            --gold-dark: #a37937;
+            --glass-bg: rgba(22, 12, 38, 0.75);
+            --glass-border: rgba(223, 179, 110, 0.25);
+            --text-main: #f3f0f7;
+            --text-muted: #a79cb8;
         }
 
         * {
-            box-sizing: border-box;
             margin: 0;
             padding: 0;
+            box-sizing: border-box;
         }
 
         body {
-            background-color: var(--bg-color);
+            background-color: var(--bg-deep-space);
             color: var(--text-main);
-            font-family: 'Montserrat', sans-serif;
-            font-weight: 300;
-            letter-spacing: 0.05em;
-            line-height: 1.6;
+            font-family: 'Noto Serif SC', serif;
             overflow-x: hidden;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 50% 0%, #2a085c 0%, transparent 70%),
+                radial-gradient(circle at 80% 60%, #1c053a 0%, transparent 50%);
+            background-attachment: fixed;
         }
 
-        h1, h2, h3, .serif-font {
-            font-family: 'Cormorant Garamond', serif;
-            font-weight: 400;
-        }
-
-        /* Navigation */
-        nav {
+        #starfield {
             position: fixed;
             top: 0;
             left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        .container {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cinzel {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.15em;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fff2d4 0%, #dfb36e 40%, #c18f43 70%, #fbe3b5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--gold-light);
+            border: 1px solid var(--gold-primary);
+            padding: 0.75rem 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .gold-border-btn:hover {
+            background: var(--gold-primary);
+            color: #07040d;
+            box-shadow: 0 0 20px var(--purple-glow);
+        }
+
+        /* 辅助按钮样式 */
+        .gold-solid-btn {
+            background: var(--gold-primary);
+            color: #07040d;
+            border: 1px solid var(--gold-primary);
+            padding: 0.75rem 1.5rem;
+            font-size: 0.85rem;
+            letter-spacing: 0.15em;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+        }
+
+        .gold-solid-btn:hover {
+            background: var(--gold-light);
+            box-shadow: 0 0 25px var(--gold-primary);
+        }
+
+        /* ================= 2. 顶栏 Header ================= */
+        header {
+            position: fixed;
+            top: 0;
             width: 100%;
+            padding: 1.2rem 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            background: rgba(7, 4, 13, 0.8);
+        }
+
+        .header-content {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            padding: 2rem 4rem;
-            background: rgba(12, 12, 12, 0.85);
-            backdrop-filter: blur(10px);
-            z-index: 1000;
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .nav-links, .nav-right {
-            display: flex;
-            gap: 2.5rem;
-            list-style: none;
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-        }
-
-        .nav-links a, .nav-right a {
-            color: var(--text-main);
-            text-decoration: none;
-            transition: color 0.3s ease;
-        }
-
-        .nav-links a:hover, .nav-right a:hover {
-            color: var(--accent-gold);
         }
 
         .logo {
-            font-family: 'Cormorant Garamond', serif;
             font-size: 1.6rem;
-            letter-spacing: 0.3em;
-            text-transform: uppercase;
+            font-weight: 700;
             text-decoration: none;
-            color: var(--text-main);
         }
 
-        /* Hero Section */
-        header.hero {
-            height: 100vh;
+        .nav-info {
             display: flex;
-            flex-direction: column;
-            justify-content: center;
+            gap: 2rem;
             align-items: center;
-            text-align: center;
-            padding: 0 1rem;
-            background: linear-gradient(rgba(12,12,12,0.4), rgba(12,12,12,0.8)), url('https://images.unsplash.com/photo-1548036328-c9fa89d128fa?q=80&w=2000&auto=format&fit=crop') no-repeat center center/cover;
-        }
-
-        .hero-overline {
-            font-size: 0.7rem;
-            letter-spacing: 0.4em;
-            text-transform: uppercase;
-            color: var(--accent-gold);
-            margin-bottom: 1.5rem;
-        }
-
-        .hero h1 {
-            font-size: clamp(3rem, 6vw, 5.5rem);
-            line-height: 1.1;
-            margin-bottom: 1.5rem;
-            letter-spacing: 0.02em;
-        }
-
-        .hero p {
-            max-width: 600px;
-            font-size: 0.95rem;
+            font-size: 0.85rem;
             color: var(--text-muted);
-            margin-bottom: 2.5rem;
-            line-height: 1.8;
         }
 
-        .btn {
-            display: inline-block;
-            padding: 1rem 2.5rem;
-            border: 1px solid var(--text-main);
-            color: var(--text-main);
-            text-decoration: none;
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 0.25em;
-            transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-            background: transparent;
+        .nav-info span {
+            color: var(--gold-light);
         }
 
-        .btn:hover {
-            background: var(--text-main);
-            color: var(--bg-color);
-            border-color: var(--text-main);
+        .cart-icon-btn {
+            position: relative;
+            background: rgba(147, 51, 234, 0.15);
+            border: 1px solid var(--gold-primary);
+            color: var(--gold-light);
+            padding: 0.5rem 1.2rem;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.85rem;
         }
 
-        /* Manifesto Section */
-        section.manifesto {
-            padding: 10rem 2rem;
-            max-width: 800px;
-            margin: 0 auto;
+        .cart-badge {
+            background: var(--gold-primary);
+            color: #000;
+            border-radius: 50%;
+            width: 20px;
+            height: 20px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.75rem;
+            font-weight: bold;
+        }
+
+        /* ================= 3. Hero 首屏 ================= */
+        .hero {
+            min-height: 85vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
             text-align: center;
+            padding-top: 6rem;
         }
 
-        section.manifesto h2 {
-            font-size: clamp(2rem, 3.5vw, 3rem);
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 1.2rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            letter-spacing: 0.2em;
             margin-bottom: 2rem;
-            letter-spacing: 0.05em;
         }
 
-        section.manifesto p {
-            font-size: 1.05rem;
-            color: var(--text-muted);
-            line-height: 2;
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid var(--glass-border);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--gold-primary);
+            letter-spacing: 0.2em;
+            margin-bottom: 1.5rem;
+            background: rgba(147, 51, 234, 0.1);
         }
 
-        /* Collections Grid */
-        section.collection {
-            padding: 6rem 4rem;
-            max-width: 1400px;
-            margin: 0 auto;
+        /* ================= 4. 臻品展示柜 ================= */
+        .collection-section {
+            padding: 6rem 0;
         }
 
         .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: flex-end;
+            text-align: center;
             margin-bottom: 4rem;
-            border-bottom: 1px solid var(--border-subtle);
-            padding-bottom: 1.5rem;
         }
 
-        .section-header h2 {
+        .section-title {
             font-size: 2.2rem;
-            letter-spacing: 0.05em;
-        }
-
-        .section-header span {
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            color: var(--text-muted);
-            text-transform: uppercase;
-        }
-
-        .product-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
-            gap: 3rem;
-        }
-
-        .product-card {
-            background: var(--card-bg);
-            border: 1px solid var(--border-subtle);
-            transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .product-card:hover {
-            transform: translateY(-8px);
-        }
-
-        .product-image {
-            height: 480px;
-            width: 100%;
-            overflow: hidden;
-            position: relative;
-        }
-
-        .product-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            transition: transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-        }
-
-        .product-card:hover .product-image img {
-            transform: scale(1.04);
-        }
-
-        .product-badge {
-            position: absolute;
-            top: 1.5rem;
-            right: 1.5rem;
-            background: rgba(12, 12, 12, 0.7);
-            backdrop-filter: blur(5px);
-            padding: 0.4rem 0.8rem;
-            font-size: 0.65rem;
-            letter-spacing: 0.15em;
-            text-transform: uppercase;
-            border: 1px solid var(--border-subtle);
-        }
-
-        .product-info {
-            padding: 2.5rem;
-        }
-
-        .product-category {
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            color: var(--accent-gold);
-            text-transform: uppercase;
             margin-bottom: 0.8rem;
         }
 
-        .product-info h3 {
-            font-size: 1.6rem;
+        .section-desc {
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            font-size: 0.9rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 2.5rem;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            padding: 1.5rem;
+            transition: all 0.4s ease;
+            backdrop-filter: blur(10px);
+            display: flex;
+            flex-direction: column;
+            justify-content: space-between;
+        }
+
+        .card:hover {
+            transform: translateY(-8px);
+            border-color: var(--gold-primary);
+            box-shadow: 0 15px 35px rgba(223, 179, 110, 0.15), 0 0 30px var(--purple-glow);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            height: 360px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 2px;
+            background: #0d0818;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.6s ease;
+        }
+
+        .card:hover .card-img-wrapper img {
+            transform: scale(1.05);
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(7, 4, 13, 0.85);
+            border: 1px solid var(--gold-dark);
+            color: var(--gold-light);
+            font-size: 0.75rem;
+            padding: 0.3rem 0.8rem;
+            letter-spacing: 0.1em;
+        }
+
+        .card-info {
+            padding-top: 1.2rem;
+            text-align: center;
+        }
+
+        .card-title-en {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-title-cn {
+            color: var(--text-muted);
+            font-size: 0.85rem;
             margin-bottom: 1rem;
         }
 
-        .product-desc {
-            font-size: 0.85rem;
-            color: var(--text-muted);
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
+        .card-price {
+            font-size: 1.3rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin-bottom: 1.2rem;
         }
 
-        .product-footer {
+        .card-actions {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        .card-actions button {
+            flex: 1;
+        }
+
+        /* 腕表单独突出排版 */
+        .card.featured {
+            grid-column: span 1;
+            border: 1px solid var(--gold-primary);
+            background: linear-gradient(145deg, rgba(30, 15, 50, 0.85) 0%, rgba(10, 5, 20, 0.95) 100%);
+        }
+
+        @media (min-width: 1100px) {
+            .card.featured {
+                grid-column: span 2;
+                flex-direction: row;
+                gap: 2rem;
+                align-items: center;
+            }
+            .card.featured .card-img-wrapper {
+                height: 440px;
+                flex: 1.2;
+            }
+            .card.featured .card-info {
+                flex: 1;
+                text-align: left;
+                padding-top: 0;
+            }
+            .card.featured .card-actions {
+                justify-content: flex-start;
+            }
+        }
+
+        /* ================= 5. 侧边栏购物车 Drawer ================= */
+        .cart-drawer-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(0, 0, 0, 0.7);
+            backdrop-filter: blur(8px);
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .cart-drawer-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .cart-drawer {
+            position: fixed;
+            top: 0;
+            right: -450px;
+            width: 100%;
+            max-width: 450px;
+            height: 100vh;
+            background: #0f071f;
+            border-left: 1px solid var(--gold-primary);
+            z-index: 1001;
+            transition: right 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+            display: flex;
+            flex-direction: column;
+            padding: 2rem;
+            box-shadow: -10px 0 40px rgba(0, 0, 0, 0.8);
+        }
+
+        .cart-drawer.active {
+            right: 0;
+        }
+
+        .drawer-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            border-top: 1px solid var(--border-subtle);
-            padding-top: 1.5rem;
-        }
-
-        .price {
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.4rem;
-            letter-spacing: 0.05em;
-        }
-
-        .price-rmb {
-            font-size: 0.7rem;
-            color: var(--text-muted);
-            font-family: 'Montserrat', sans-serif;
-            display: block;
-        }
-
-        .product-link {
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            color: var(--text-main);
-            text-decoration: none;
-            transition: color 0.3s;
-        }
-
-        .product-link:hover {
-            color: var(--accent-gold);
-        }
-
-        /* Atelier Craftsmanship Section */
-        section.atelier {
-            padding: 8rem 4rem;
-            background: #111;
-            border-top: 1px solid var(--border-subtle);
-            border-bottom: 1px solid var(--border-subtle);
-        }
-
-        .atelier-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 5rem;
-            align-items: center;
-        }
-
-        .atelier-text h2 {
-            font-size: 2.5rem;
+            border-bottom: 1px solid var(--glass-border);
+            padding-bottom: 1rem;
             margin-bottom: 1.5rem;
-            letter-spacing: 0.05em;
         }
 
-        .atelier-text p {
-            font-size: 0.95rem;
-            color: var(--text-muted);
-            line-height: 1.9;
-            margin-bottom: 2rem;
-        }
-
-        .atelier-image {
-            height: 500px;
-            width: 100%;
-        }
-
-        .atelier-image img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-
-        /* Footer */
-        footer {
-            padding: 6rem 4rem 4rem 4rem;
-            background: var(--bg-color);
-            border-top: 1px solid var(--border-subtle);
-        }
-
-        .footer-grid {
-            max-width: 1400px;
-            margin: 0 auto;
-            display: grid;
-            grid-template-columns: 2fr 1fr 1fr 1.5fr;
-            gap: 4rem;
-            margin-bottom: 5rem;
-        }
-
-        .footer-col h4 {
-            font-size: 0.75rem;
-            letter-spacing: 0.2em;
-            text-transform: uppercase;
-            margin-bottom: 1.5rem;
-            color: var(--accent-gold);
-        }
-
-        .footer-col ul {
-            list-style: none;
-        }
-
-        .footer-col ul li {
-            margin-bottom: 0.8rem;
-        }
-
-        .footer-col ul li a {
-            color: var(--text-muted);
-            text-decoration: none;
-            font-size: 0.85rem;
-            transition: color 0.3s;
-        }
-
-        .footer-col ul li a:hover {
-            color: var(--text-main);
-        }
-
-        .newsletter-form {
-            display: flex;
-            margin-top: 1rem;
-            border-bottom: 1px solid var(--text-main);
-            padding-bottom: 0.5rem;
-        }
-
-        .newsletter-form input {
-            background: transparent;
+        .drawer-close {
+            background: none;
             border: none;
-            color: var(--text-main);
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.85rem;
-            outline: none;
-            width: 100%;
-        }
-
-        .newsletter-form button {
-            background: transparent;
-            border: none;
-            color: var(--text-main);
-            text-transform: uppercase;
-            font-size: 0.7rem;
-            letter-spacing: 0.2em;
+            color: var(--text-muted);
+            font-size: 1.8rem;
             cursor: pointer;
-            transition: color 0.3s;
         }
 
-        .newsletter-form button:hover {
-            color: var(--accent-gold);
+        .drawer-close:hover { color: var(--gold-light); }
+
+        .cart-items-list {
+            flex: 1;
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 1.2rem;
+            padding-right: 0.5rem;
         }
 
-        .footer-bottom {
-            max-width: 1400px;
-            margin: 0 auto;
+        .cart-item {
+            display: flex;
+            gap: 1rem;
+            background: rgba(22, 12, 38, 0.6);
+            border: 1px solid var(--glass-border);
+            padding: 0.8rem;
+            align-items: center;
+        }
+
+        .cart-item-img {
+            width: 70px;
+            height: 70px;
+            object-fit: cover;
+            border: 1px solid var(--gold-dark);
+        }
+
+        .cart-item-details {
+            flex: 1;
+        }
+
+        .cart-item-title {
+            font-size: 0.95rem;
+            font-weight: 600;
+            color: var(--gold-light);
+        }
+
+        .cart-item-price {
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-top: 0.2rem;
+        }
+
+        .cart-item-controls {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-top: 0.5rem;
+        }
+
+        .qty-btn {
+            background: rgba(255, 255, 255, 0.1);
+            border: 1px solid var(--glass-border);
+            color: #fff;
+            width: 22px;
+            height: 22px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .cart-item-remove {
+            color: #ff5555;
+            font-size: 0.75rem;
+            cursor: pointer;
+            margin-left: auto;
+            background: none;
+            border: none;
+        }
+
+        .drawer-footer {
+            border-top: 1px solid var(--glass-border);
+            padding-top: 1.5rem;
+            margin-top: 1rem;
+        }
+
+        .drawer-total {
             display: flex;
             justify-content: space-between;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin-bottom: 1.5rem;
+        }
+
+        /* ================= 6. 结算弹窗 Modal ================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(5, 2, 10, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 2000;
+            display: flex;
             align-items: center;
-            border-top: 1px solid var(--border-subtle);
-            padding-top: 2rem;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: #110822;
+            border: 1px solid var(--gold-primary);
+            border-radius: 4px;
+            width: 90%;
+            max-width: 680px;
+            padding: 2.2rem;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px var(--purple-glow);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 0.3rem;
+        }
+
+        .order-summary-box {
+            background: rgba(7, 4, 13, 0.7);
+            border: 1px dashed var(--glass-border);
+            padding: 1.2rem;
+            margin: 1.5rem 0;
+            max-height: 160px;
+            overflow-y: auto;
+        }
+
+        .order-summary-item {
+            display: flex;
+            justify-content: space-between;
+            font-size: 0.85rem;
+            margin-bottom: 0.5rem;
+            color: var(--text-main);
+        }
+
+        .order-summary-total {
+            display: flex;
+            justify-content: space-between;
+            border-top: 1px solid var(--glass-border);
+            padding-top: 0.8rem;
+            margin-top: 0.8rem;
+            font-size: 1.2rem;
+            font-weight: 700;
+            color: var(--gold-primary);
+        }
+
+        .pay-tabs {
+            display: flex;
+            gap: 0.8rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .pay-tab {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+        }
+
+        .pay-tab.active {
+            background: rgba(147, 51, 234, 0.25);
+            border-color: var(--gold-primary);
+            color: var(--gold-light);
+        }
+
+        .pay-panel { display: none; text-align: center; }
+        .pay-panel.active { display: block; }
+
+        .bank-card-box {
+            background: linear-gradient(135deg, #1f113a 0%, #0d051a 100%);
+            border: 1px solid var(--gold-primary);
+            padding: 1.5rem;
+            border-radius: 6px;
+            text-align: left;
+        }
+
+        .bank-card-num {
+            font-family: monospace;
+            font-size: 1.4rem;
+            letter-spacing: 0.15em;
+            color: var(--gold-light);
+            margin: 0.8rem 0;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: var(--gold-primary);
+            color: #000;
+            border: none;
+            padding: 0.4rem 1rem;
             font-size: 0.75rem;
+            cursor: pointer;
+            font-weight: 600;
+            float: right;
+        }
+
+        .qr-code-img {
+            width: 210px;
+            height: 210px;
+            object-fit: contain;
+            border: 2px solid var(--gold-primary);
+            margin: 1rem auto;
+            display: block;
+            background: #fff;
+        }
+
+        .contact-info-block {
+            margin-top: 1.5rem;
+            padding-top: 1rem;
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            text-align: left;
+            line-height: 1.8;
+        }
+
+        .input-group {
+            margin-bottom: 1rem;
+            text-align: left;
+        }
+
+        .input-group label {
+            display: block;
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-bottom: 0.4rem;
+        }
+
+        .input-group input {
+            width: 100%;
+            background: rgba(7, 4, 13, 0.8);
+            border: 1px solid var(--glass-border);
+            padding: 0.6rem 0.8rem;
+            color: #fff;
+            font-size: 0.85rem;
+        }
+
+        /* 页脚 */
+        footer {
+            padding: 4rem 0 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.85rem;
             color: var(--text-muted);
         }
 
-        /* Responsive Design */
-        @media (max-width: 900px) {
-            nav { padding: 1.5rem 2rem; }
-            .nav-links { display: none; }
-            .atelier-container { grid-template-columns: 1fr; gap: 3rem; }
-            .footer-grid { grid-template-columns: 1fr 1fr; gap: 3rem; }
-            section.collection { padding: 4rem 1.5rem; }
-        }
-
-        @media (max-width: 600px) {
-            .footer-grid { grid-template-columns: 1fr; }
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.2rem; }
+            .grid { grid-template-columns: 1fr; }
+            .card.featured { grid-column: span 1; flex-direction: column; }
+            .nav-info { display: none; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Navigation Bar -->
-    <nav>
-        <ul class="nav-links">
-            <li><a href="#collections">Collections</a></li>
-            <li><a href="#atelier">Atelier</a></li>
-            <li><a href="#heritage">Heritage</a></li>
-        </ul>
-        <a href="#" class="logo">MINGZI</a>
-        <ul class="nav-right">
-            <li><a href="#">USD ($)</a></li>
-            <li><a href="#">Search</a></li>
-            <li><a href="#">Bag (0)</a></li>
-        </ul>
-    </nav>
+    <canvas id="starfield"></canvas>
 
-    <!-- Hero Section -->
-    <header class="hero">
-        <span class="hero-overline">Maison Zoria — Est. MMXXI</span>
-        <h1>The Architecture of Silence.</h1>
-        <p>Uncompromising craft. Sculpted in limited numbered iterations using Tuscan vegetable-tanned hides and lost-wax cast precious metals. Designed for those who command a room without speaking.</p>
-        <a href="#collections" class="btn">Explore Editions</a>
+    <!-- 顶栏 -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo cinzel gold-gradient-text">MAISON ZORIA</a>
+            <div class="nav-info">
+                <div>微信：<span>XM0303600</span></div>
+                <div>邮箱：<span>MINGZIHAIBAO@GMAIL.COM</span></div>
+            </div>
+            <button class="cart-icon-btn cinzel" onclick="toggleCartDrawer()">
+                🛒 购物车 <span class="cart-badge" id="cartCount">0</span>
+            </button>
+        </div>
     </header>
 
-    <!-- Brand Manifesto -->
-    <section class="manifesto">
-        <h2>Anti-Ostentation.</h2>
-        <p>In an era of manufactured noise, true luxury is quiet, deliberate, and scarce. Every MINGZI creation is hand-finished in our atelier by master artisans who spend upwards of forty hours shaping a single silhouette. No visible mass logos. No seasonal compromises. Only pure form, sublime tactility, and absolute structural integrity.</p>
-    </section>
-
-    <!-- Product Collections -->
-    <section class="collection" id="collections">
-        <div class="section-header">
-            <h2>Current Editions</h2>
-            <span>Numbered Allocations</span>
-        </div>
-
-        <div class="product-grid">
-            
-            <!-- Item 1: Petite / Evening (Approx 48,300 RMB -> $6,800 USD) -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1584917865442-de89df76afd3?q=80&w=1000&auto=format&fit=crop" alt="L'Ombre de Nuit">
-                    <div class="product-badge">Edition of 30</div>
-                </div>
-                <div class="product-info">
-                    <div class="product-category">Petite & Evening</div>
-                    <h3>L'Ombre de Nuit</h3>
-                    <p class="product-desc">Architectural flap silhouette in Toscana black calfskin, anchored by an integrated custom magnetic closure and hand-painted edges.</p>
-                    <div class="product-footer">
-                        <div>
-                            <span class="price">$6,800.00</span>
-                            <span class="price-rmb">≈ ¥48,300 CNY</span>
-                        </div>
-                        <a href="#" class="product-link">Inquire →</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item 2: Grand Tote & Day (Approx 103,000 RMB -> $14,500 USD) -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1590874103328-eac38a683ce7?q=80&w=1000&auto=format&fit=crop" alt="Le Grand Silence">
-                    <div class="product-badge">Atelier Reserve</div>
-                </div>
-                <div class="product-info">
-                    <div class="product-category">Grand Tote & Day</div>
-                    <h3>Le Grand Silence</h3>
-                    <p class="product-desc">An effortless daily carrier engineered with unlined double-face saddle brown calfskin, celebrating the pure texture of full-grain hides.</p>
-                    <div class="product-footer">
-                        <div>
-                            <span class="price">$14,500.00</span>
-                            <span class="price-rmb">≈ ¥103,000 CNY</span>
-                        </div>
-                        <a href="#" class="product-link">Inquire →</a>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Item 3: Haute Atelier / Bespoke (Approx 202,300 RMB -> $28,500 USD) -->
-            <div class="product-card">
-                <div class="product-image">
-                    <img src="https://images.unsplash.com/photo-1594223274512-ad480373982c?q=80&w=1000&auto=format&fit=crop" alt="The Monolith Bespoke">
-                    <div class="product-badge">Numbered 1 of 15</div>
-                </div>
-                <div class="product-info">
-                    <div class="product-category">Haute Atelier</div>
-                    <h3>The Monolith Collector's Edition</h3>
-                    <p class="product-desc">Hand-waxed forest green lambskin featuring custom lost-wax cast 18k gold-plated brass hardware and artisan serial registration.</p>
-                    <div class="product-footer">
-                        <div>
-                            <span class="price">$28,500.00</span>
-                            <span class="price-rmb">≈ ¥202,300 CNY</span>
-                        </div>
-                        <a href="#" class="product-link">Private Allocation →</a>
-                    </div>
-                </div>
-            </div>
-
+    <!-- Hero -->
+    <section class="hero">
+        <div class="container">
+            <span class="hero-badge cinzel">HAUTE HORLOGERIE & MAROQUINERIE</span>
+            <h1 class="hero-title cinzel gold-gradient-text">凝结时光之华<br>极尽星空之美</h1>
+            <p class="hero-subtitle">Maison Zoria 铭兹世家 · 顶级珠宝腕表与私人高定皮具</p>
+            <a href="#collection" class="gold-border-btn cinzel">探索私享系列 (EXPLORE)</a>
         </div>
     </section>
 
-    <!-- Atelier Craftsmanship Section -->
-    <section class="atelier" id="atelier">
-        <div class="atelier-container">
-            <div class="atelier-text">
-                <h2>The Art of Restraint.</h2>
-                <p>Sourced from multi-generational tanneries in Tuscany, our hides are drum-dyed and naturally tumbled to preserve the skin's living organic structure. Every piece evolves gracefully, developing a rich patina over decades of wear.</p>
-                <p>Eschewing industrial stamping, each metal hardware component begins as a hand-sculpted wax model, cast in solid brass, and polished manually to a liquid mirror finish.</p>
-                <a href="#" class="btn">Discover Our Process</a>
+    <!-- 臻品展柜 -->
+    <section class="collection-section" id="collection">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title cinzel gold-gradient-text">THE MASTERPIECE COLLECTION</h2>
+                <p class="section-desc">每一件作品皆为独一无二的世家艺术，静候有缘藏家</p>
             </div>
-            <div class="atelier-image">
-                <img src="https://images.unsplash.com/photo-1544441893-675973e31985?q=80&w=1000&auto=format&fit=crop" alt="Atelier Craftsmanship">
+
+            <div class="grid">
+                
+                <!-- 1. Dream Awakening 腕表 -->
+                <div class="card featured">
+                    <div class="card-img-wrapper">
+                        <span class="card-tag cinzel">1/1 PIECE UNIQUE</span>
+                        <img src="Dream Awakening.png" alt="Dream Awakening" onerror="this.src='Dream Awakening.jpg'">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title-en cinzel gold-gradient-text">Dream Awakening</div>
+                        <div class="card-title-cn">梦醒时分 · 顶级珠宝高定腕表</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.2rem; line-height: 1.6;">
+                            全表密集镶嵌顶级天然钻石，18K黄金与铂金交织连结。珍珠母贝表盘，搭载瑞士超薄复杂机械机芯。
+                        </p>
+                        <div class="card-price cinzel">¥ 3,000,000 CNY</div>
+                        <div class="card-actions">
+                            <button class="gold-border-btn cinzel" onclick="addToCart('Dream Awakening 梦醒时分 珠宝腕表', 3000000, 'Dream Awakening.png')">加购物车</button>
+                            <button class="gold-solid-btn cinzel" onclick="buyNow('Dream Awakening 梦醒时分 珠宝腕表', 3000000)">立即购买</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 2. Carousel Dreams -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <span class="card-tag cinzel">HAUTE BAG</span>
+                        <img src="Carousel Dreams.jpg" alt="Carousel Dreams">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title-en cinzel">Carousel Dreams</div>
+                        <div class="card-title-cn">梦境旋转木马 · 奢华皮具</div>
+                        <div class="card-price cinzel">¥ 370,000 CNY</div>
+                        <div class="card-actions">
+                            <button class="gold-border-btn cinzel" onclick="addToCart('Carousel Dreams 梦境旋转木马', 370000, 'Carousel Dreams.jpg')">加购物车</button>
+                            <button class="gold-solid-btn cinzel" onclick="buyNow('Carousel Dreams 梦境旋转木马', 370000)">立即购买</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 3. Cloud Bloom -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <span class="card-tag cinzel">HAUTE BAG</span>
+                        <img src="Cloud Bloom.jpg" alt="Cloud Bloom">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title-en cinzel">Cloud Bloom</div>
+                        <div class="card-title-cn">云舒双阙 · 高定手袋</div>
+                        <div class="card-price cinzel">¥ 290,000 CNY</div>
+                        <div class="card-actions">
+                            <button class="gold-border-btn cinzel" onclick="addToCart('Cloud Bloom 云舒双阙', 290000, 'Cloud Bloom.jpg')">加购物车</button>
+                            <button class="gold-solid-btn cinzel" onclick="buyNow('Cloud Bloom 云舒双阙', 290000)">立即购买</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 4. Aurora Castle -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <span class="card-tag cinzel">HAUTE BAG</span>
+                        <img src="Aurora Castle.jpg" alt="Aurora Castle">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title-en cinzel">Aurora Castle</div>
+                        <div class="card-title-cn">白堡星梦 · 高定手袋</div>
+                        <div class="card-price cinzel">¥ 230,000 CNY</div>
+                        <div class="card-actions">
+                            <button class="gold-border-btn cinzel" onclick="addToCart('Aurora Castle 白堡星梦', 230000, 'Aurora Castle.jpg')">加购物车</button>
+                            <button class="gold-solid-btn cinzel" onclick="buyNow('Aurora Castle 白堡星梦', 230000)">立即购买</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 5. Nocturnal Cure -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <span class="card-tag cinzel">HAUTE BAG</span>
+                        <img src="Nocturnal Cure.jpg" alt="Nocturnal Cure">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title-en cinzel">Nocturnal Cure</div>
+                        <div class="card-title-cn">夜色疗愈 · 典藏皮具</div>
+                        <div class="card-price cinzel">¥ 210,000 CNY</div>
+                        <div class="card-actions">
+                            <button class="gold-border-btn cinzel" onclick="addToCart('Nocturnal Cure 夜色疗愈', 210000, 'Nocturnal Cure.jpg')">加购物车</button>
+                            <button class="gold-solid-btn cinzel" onclick="buyNow('Nocturnal Cure 夜色疗愈', 210000)">立即购买</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 6. Lunar Cove Cat -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <span class="card-tag cinzel">HAUTE BAG</span>
+                        <img src="Lunar Cove Cat Bag.jpg" alt="Lunar Cove Cat">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title-en cinzel">Lunar Cove Cat</div>
+                        <div class="card-title-cn">月湾灵猫 · 高定手袋</div>
+                        <div class="card-price cinzel">¥ 186,000 CNY</div>
+                        <div class="card-actions">
+                            <button class="gold-border-btn cinzel" onclick="addToCart('Lunar Cove Cat 月湾灵猫', 186000, 'Lunar Cove Cat Bag.jpg')">加购物车</button>
+                            <button class="gold-solid-btn cinzel" onclick="buyNow('Lunar Cove Cat 月湾灵猫', 186000)">立即购买</button>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- 7. Lunar Nova -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <span class="card-tag cinzel">HAUTE BAG</span>
+                        <img src="Lunar Nova.png" alt="Lunar Nova" onerror="this.src='Lunar Nova.jpg'">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title-en cinzel">Lunar Nova</div>
+                        <div class="card-title-cn">新月星芒 · 典藏手袋</div>
+                        <div class="card-price cinzel">¥ 120,000 CNY</div>
+                        <div class="card-actions">
+                            <button class="gold-border-btn cinzel" onclick="addToCart('Lunar Nova 新月星芒', 120000, 'Lunar Nova.png')">加购物车</button>
+                            <button class="gold-solid-btn cinzel" onclick="buyNow('Lunar Nova 新月星芒', 120000)">立即购买</button>
+                        </div>
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
 
-    <!-- Footer -->
+    <!-- 侧边栏购物车 Drawer -->
+    <div class="cart-drawer-overlay" id="cartOverlay" onclick="toggleCartDrawer()"></div>
+    <div class="cart-drawer" id="cartDrawer">
+        <div class="drawer-header">
+            <h3 class="cinzel gold-gradient-text">MY SHOPPING BAG</h3>
+            <button class="drawer-close" onclick="toggleCartDrawer()">&times;</button>
+        </div>
+        <div class="cart-items-list" id="cartItemsList">
+            <!-- 动态购物车列表 -->
+        </div>
+        <div class="drawer-footer">
+            <div class="drawer-total">
+                <span>小计金额:</span>
+                <span id="drawerTotalAmount">¥ 0 CNY</span>
+            </div>
+            <button class="gold-solid-btn cinzel" style="width: 100%; padding: 1rem;" onclick="checkoutCart()">前往私享结算 (CHECKOUT)</button>
+        </div>
+    </div>
+
+    <!-- 支付与专享结账 Modal -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeCheckout()">&times;</button>
+            <h3 class="modal-title cinzel gold-gradient-text">VIP PRIVATE CHECKOUT</h3>
+            <div style="text-align: center; font-size: 0.8rem; color: var(--text-muted); margin-bottom: 1rem;">Maison Zoria 私享尊贵结算通道</div>
+
+            <!-- 选购明细 -->
+            <div class="order-summary-box" id="modalOrderSummary">
+                <!-- 动态插入结构 -->
+            </div>
+
+            <!-- 收货信息 -->
+            <div class="input-group">
+                <label>贵宾姓名与私享交付地址 (Recipient & Address):</label>
+                <input type="text" placeholder="例如：张先生 / 上海市黄浦区..." id="clientAddress">
+            </div>
+
+            <!-- 支付 Tab -->
+            <div class="pay-tabs">
+                <div class="pay-tab active" onclick="switchPayTab('bank')">银行卡公户/电汇</div>
+                <div class="pay-tab" onclick="switchPayTab('wechat')">微信支付 (WeChat)</div>
+                <div class="pay-tab" onclick="switchPayTab('alipay')">支付宝 (Alipay)</div>
+            </div>
+
+            <!-- Bank Panel -->
+            <div class="pay-panel active" id="panel-bank">
+                <div class="bank-card-box">
+                    <button class="copy-btn" onclick="copyCard()">复制卡号</button>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">收款银行账号 (Card Number)</div>
+                    <div class="bank-card-num">6217 0019 3004 3294 322</div>
+                    <div style="font-size: 0.85rem; color: var(--text-main);">账户名称：Maison Zoria 铭兹高定账户</div>
+                </div>
+            </div>
+
+            <!-- WeChat Panel -->
+            <div class="pay-panel" id="panel-wechat">
+                <p style="font-size: 0.8rem; color: var(--text-muted);">微信扫描二维码完成结算</p>
+                <img src="27a4d3769f19dc654be01702cd84a529.jpg" alt="微信收款码" class="qr-code-img">
+            </div>
+
+            <!-- Alipay Panel -->
+            <div class="pay-panel" id="panel-alipay">
+                <p style="font-size: 0.8rem; color: var(--text-muted);">支付宝扫描二维码完成结算（支持花呗/分期）</p>
+                <img src="5d5f047b9aadcf79289991b78bd7d85b.jpg" alt="支付宝收款码" class="qr-code-img">
+            </div>
+
+            <!-- 官方联系方式 -->
+            <div class="contact-info-block">
+                <div>📌 <strong>官方专享客服微信号：</strong><span style="color: var(--gold-light);">XM0303600</span></div>
+                <div>✉️ <strong>官方沟通电子邮箱：</strong><span style="color: var(--gold-light);">MINGZIHAIBAO@GMAIL.COM</span></div>
+                <div style="font-size: 0.75rem; margin-top: 0.4rem; color: #7a6e8f;">* 汇款或扫码支付完成后，请联系官方微信提供凭证，管家将为您启动专程送送保价流程。</div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- 页脚 -->
     <footer>
-        <div class="footer-grid">
-            <div class="footer-col">
-                <a href="#" class="logo" style="display: inline-block; margin-bottom: 1.5rem;">MINGZI</a>
-                <p style="color: var(--text-muted); font-size: 0.85rem; max-width: 300px; line-height: 1.7;">
-                    Paris &middot; Xiamen &middot; New York<br>The definitive statement in quiet luxury and bespoke leather goods.
-                </p>
-            </div>
-            <div class="footer-col">
-                <h4>Atelier</h4>
-                <ul>
-                    <li><a href="#">Private Appointments</a></li>
-                    <li><a href="#">Bespoke Commissions</a></li>
-                    <li><a href="#">Lost-Wax Casting</a></li>
-                    <li><a href="#">Material Index</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Client Care</h4>
-                <ul>
-                    <li><a href="#">Global Insured Shipping</a></li>
-                    <li><a href="#">White-Glove Maintenance</a></li>
-                    <li><a href="#">Authentication</a></li>
-                    <li><a href="#">Concierge Contact</a></li>
-                </ul>
-            </div>
-            <div class="footer-col">
-                <h4>Private Journal</h4>
-                <p style="color: var(--text-muted); font-size: 0.8rem; margin-bottom: 1rem;">Receive private invitations to seasonal releases and archival drops.</p>
-                <form class="newsletter-form" onsubmit="event.preventDefault();">
-                    <input type="email" placeholder="Enter your email address">
-                    <button type="submit">Join</button>
-                </form>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p>&copy; 2026 MINGZI Maison Zoria. All Rights Reserved.</p>
-            <div style="display: flex; gap: 2rem;">
-                <a href="#" style="color: var(--text-muted); text-decoration: none;">Privacy Policy</a>
-                <a href="#" style="color: var(--text-muted); text-decoration: none;">Terms of Service</a>
-            </div>
+        <div class="container">
+            <div class="cinzel gold-gradient-text" style="font-size: 1.6rem; margin-bottom: 0.8rem;">MAISON ZORIA</div>
+            <p style="letter-spacing: 0.15em; margin-bottom: 0.8rem;">官方微信：XM0303600 | 官方邮箱：MINGZIHAIBAO@GMAIL.COM</p>
+            <p style="font-size: 0.75rem; color: #665b7a;">&copy; 2026 MAISON ZORIA. ALL RIGHTS RESERVED. PRIVATE ATELIER COLLECTION.</p>
         </div>
     </footer>
 
+    <!-- JS 逻辑 -->
+    <script>
+        /* 1. 星空背景 */
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Star {
+            constructor() { this.reset(); }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.8;
+                this.alpha = Math.random();
+                this.speed = Math.random() * 0.015 + 0.005;
+                this.color = Math.random() > 0.3 ? '#e0c3fc' : '#fbe3b5';
+            }
+            update() {
+                this.alpha += this.speed;
+                if (this.alpha > 1 || this.alpha < 0) this.speed = -this.speed;
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.abs(this.alpha);
+                ctx.fillStyle = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+        for (let i = 0; i < 150; i++) stars.push(new Star());
+        function animateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(s => { s.update(); s.draw(); });
+            requestAnimationFrame(animateStars);
+        }
+        animateStars();
+
+        /* 2. 购物车核心逻辑 */
+        let cart = [];
+
+        function addToCart(name, price, img) {
+            const existing = cart.find(item => item.name === name);
+            if (existing) {
+                existing.qty++;
+            } else {
+                cart.push({ name, price, img, qty: 1 });
+            }
+            updateCartUI();
+            toggleCartDrawer(true);
+        }
+
+        function updateQty(name, delta) {
+            const item = cart.find(i => i.name === name);
+            if (item) {
+                item.qty += delta;
+                if (item.qty <= 0) cart = cart.filter(i => i.name !== name);
+            }
+            updateCartUI();
+        }
+
+        function removeFromCart(name) {
+            cart = cart.filter(i => i.name !== name);
+            updateCartUI();
+        }
+
+        function updateCartUI() {
+            const listEl = document.getElementById('cartItemsList');
+            const countEl = document.getElementById('cartCount');
+            const totalEl = document.getElementById('drawerTotalAmount');
+
+            let totalQty = 0;
+            let totalPrice = 0;
+            listEl.innerHTML = '';
+
+            if (cart.length === 0) {
+                listEl.innerHTML = '<div style="text-align:center; color: var(--text-muted); padding: 3rem 0;">购物袋空空如也</div>';
+            } else {
+                cart.forEach(item => {
+                    totalQty += item.qty;
+                    totalPrice += item.price * item.qty;
+                    listEl.innerHTML += `
+                        <div class="cart-item">
+                            <img src="${item.img}" class="cart-item-img" onerror="this.src='Dream Awakening.jpg'">
+                            <div class="cart-item-details">
+                                <div class="cart-item-title">${item.name}</div>
+                                <div class="cart-item-price">¥ ${item.price.toLocaleString()} CNY</div>
+                                <div class="cart-item-controls">
+                                    <button class="qty-btn" onclick="updateQty('${item.name}', -1)">-</button>
+                                    <span style="font-size:0.85rem">${item.qty}</span>
+                                    <button class="qty-btn" onclick="updateQty('${item.name}', 1)">+</button>
+                                </div>
+                            </div>
+                            <button class="cart-item-remove" onclick="removeFromCart('${item.name}')">删除</button>
+                        </div>
+                    `;
+                });
+            }
+
+            countEl.innerText = totalQty;
+            totalEl.innerText = '¥ ' + totalPrice.toLocaleString() + ' CNY';
+        }
+
+        function toggleCartDrawer(open) {
+            const drawer = document.getElementById('cartDrawer');
+            const overlay = document.getElementById('cartOverlay');
+            if (open === true) {
+                drawer.classList.add('active');
+                overlay.classList.add('active');
+            } else if (open === false) {
+                drawer.classList.remove('active');
+                overlay.classList.remove('active');
+            } else {
+                drawer.classList.toggle('active');
+                overlay.classList.toggle('active');
+            }
+        }
+
+        /* 3. 结算逻辑 (立即购买 & 购物车结算) */
+        function buyNow(name, price) {
+            renderModalCheckout([{ name, price, qty: 1 }]);
+        }
+
+        function checkoutCart() {
+            if (cart.length === 0) {
+                alert('请先挑选作品加入购物袋');
+                return;
+            }
+            toggleCartDrawer(false);
+            renderModalCheckout(cart);
+        }
+
+        function renderModalCheckout(items) {
+            const container = document.getElementById('modalOrderSummary');
+            let total = 0;
+            let html = '';
+
+            items.forEach(item => {
+                const sub = item.price * item.qty;
+                total += sub;
+                html += `
+                    <div class="order-summary-item">
+                        <span>${item.name} x ${item.qty}</span>
+                        <span class="cinzel">¥ ${sub.toLocaleString()} CNY</span>
+                    </div>
+                `;
+            });
+
+            html += `
+                <div class="order-summary-total">
+                    <span>结算总额 (TOTAL):</span>
+                    <span class="cinzel">¥ ${total.toLocaleString()} CNY</span>
+                </div>
+            `;
+
+            container.innerHTML = html;
+            document.getElementById('checkoutModal').classList.add('active');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.remove('active');
+        }
+
+        function switchPayTab(type) {
+            const tabs = document.querySelectorAll('.pay-tab');
+            const panels = document.querySelectorAll('.pay-panel');
+            tabs.forEach(t => t.classList.remove('active'));
+            panels.forEach(p => p.classList.remove('active'));
+
+            if (type === 'bank') {
+                tabs[0].classList.add('active');
+                document.getElementById('panel-bank').classList.add('active');
+            } else if (type === 'wechat') {
+                tabs[1].classList.add('active');
+                document.getElementById('panel-wechat').classList.add('active');
+            } else if (type === 'alipay') {
+                tabs[2].classList.add('active');
+                document.getElementById('panel-alipay').classList.add('active');
+            }
+        }
+
+        function copyCard() {
+            const num = '6217001930043294322';
+            navigator.clipboard.writeText(num).then(() => {
+                alert('已成功复制银行卡号：' + num);
+            });
+        }
+    </script>
 </body>
 </html>
