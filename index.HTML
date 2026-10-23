@@ -1,0 +1,842 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maison Zoria | 铭兹世家高定珠宝与皮具</title>
+    <!-- 引入 Google Fonts 提升排版质感 -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;600;700;900&family=Noto+Serif+SC:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <style>
+        /* ================= 1. 核心紫色星空顶配色与重置 ================= */
+        :root {
+            --bg-deep-space: #07040d;
+            --bg-purple-nebula: #130a24;
+            --purple-glow: rgba(147, 51, 234, 0.35);
+            --gold-primary: #dfb36e;
+            --gold-light: #fbe3b5;
+            --gold-dark: #a37937;
+            --glass-bg: rgba(22, 12, 38, 0.65);
+            --glass-border: rgba(223, 179, 110, 0.25);
+            --text-main: #f3f0f7;
+            --text-muted: #a79cb8;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background-color: var(--bg-deep-space);
+            color: var(--text-main);
+            font-family: 'Noto Serif SC', 'Source Han Serif SC', serif;
+            overflow-x: hidden;
+            position: relative;
+            background-image: 
+                radial-gradient(circle at 50% 0%, #2a085c 0%, transparent 70%),
+                radial-gradient(circle at 80% 60%, #1c053a 0%, transparent 50%);
+            background-attachment: fixed;
+        }
+
+        /* Canvas 动态星空粒子背景 */
+        #starfield {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            z-index: 0;
+            pointer-events: none;
+        }
+
+        /* ================= 2. 全局通用组件 ================= */
+        .container {
+            max-width: 1380px;
+            margin: 0 auto;
+            padding: 0 2rem;
+            position: relative;
+            z-index: 2;
+        }
+
+        .cinzel {
+            font-family: 'Cinzel', serif;
+            letter-spacing: 0.15em;
+        }
+
+        .gold-gradient-text {
+            background: linear-gradient(135deg, #fff2d4 0%, #dfb36e 40%, #c18f43 70%, #fbe3b5 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .gold-border-btn {
+            display: inline-block;
+            background: transparent;
+            color: var(--gold-light);
+            border: 1px solid var(--gold-primary);
+            padding: 0.85rem 2.2rem;
+            font-size: 0.9rem;
+            letter-spacing: 0.2em;
+            text-transform: uppercase;
+            cursor: pointer;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            text-decoration: none;
+            text-align: center;
+        }
+
+        .gold-border-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(223, 179, 110, 0.3), transparent);
+            transition: 0.5s;
+        }
+
+        .gold-border-btn:hover::before {
+            left: 100%;
+        }
+
+        .gold-border-btn:hover {
+            background: var(--gold-primary);
+            color: #07040d;
+            box-shadow: 0 0 25px var(--purple-glow);
+        }
+
+        /* ================= 3. 顶栏 Header ================= */
+        header {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            padding: 1.5rem 0;
+            z-index: 100;
+            backdrop-filter: blur(12px);
+            border-bottom: 1px solid var(--glass-border);
+            background: rgba(7, 4, 13, 0.7);
+        }
+
+        .header-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.6rem;
+            font-weight: 700;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--text-muted);
+            text-decoration: none;
+            font-size: 0.95rem;
+            letter-spacing: 0.1em;
+            transition: color 0.3s;
+        }
+
+        .nav-links a:hover {
+            color: var(--gold-light);
+        }
+
+        /* ================= 4. Hero 首屏区块 ================= */
+        .hero {
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            padding-top: 5rem;
+            position: relative;
+        }
+
+        .hero-title {
+            font-size: 3.5rem;
+            font-weight: 300;
+            line-height: 1.2;
+            margin-bottom: 1.5rem;
+        }
+
+        .hero-subtitle {
+            font-size: 1.1rem;
+            color: var(--text-muted);
+            letter-spacing: 0.25em;
+            margin-bottom: 2.5rem;
+            font-weight: 300;
+        }
+
+        .hero-badge {
+            display: inline-block;
+            border: 1px solid var(--glass-border);
+            padding: 0.4rem 1.2rem;
+            border-radius: 50px;
+            font-size: 0.8rem;
+            color: var(--gold-primary);
+            letter-spacing: 0.2em;
+            margin-bottom: 1.5rem;
+            background: rgba(147, 51, 234, 0.1);
+        }
+
+        /* ================= 5. 臻品展示柜 (Product Grid) ================= */
+        .collection-section {
+            padding: 8rem 0;
+        }
+
+        .section-header {
+            text-align: center;
+            margin-bottom: 5rem;
+        }
+
+        .section-title {
+            font-size: 2.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .section-desc {
+            color: var(--text-muted);
+            letter-spacing: 0.15em;
+            font-size: 0.95rem;
+        }
+
+        .grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(360px, 1fr));
+            gap: 3rem;
+        }
+
+        .card {
+            background: var(--glass-bg);
+            border: 1px solid var(--glass-border);
+            border-radius: 4px;
+            padding: 1.5rem;
+            transition: all 0.5s ease;
+            position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .card:hover {
+            transform: translateY(-10px);
+            border-color: var(--gold-primary);
+            box-shadow: 0 15px 35px rgba(223, 179, 110, 0.15), 0 0 30px var(--purple-glow);
+        }
+
+        .card-img-wrapper {
+            width: 100%;
+            height: 380px;
+            overflow: hidden;
+            position: relative;
+            border-radius: 2px;
+            background: #0d0818;
+        }
+
+        .card-img-wrapper img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            transition: transform 0.8s ease;
+        }
+
+        .card:hover .card-img-wrapper img {
+            transform: scale(1.06);
+        }
+
+        .card-tag {
+            position: absolute;
+            top: 1rem;
+            right: 1rem;
+            background: rgba(7, 4, 13, 0.85);
+            border: 1px solid var(--gold-dark);
+            color: var(--gold-light);
+            font-size: 0.75rem;
+            padding: 0.3rem 0.8rem;
+            letter-spacing: 0.1em;
+        }
+
+        .card-info {
+            padding-top: 1.5rem;
+            text-align: center;
+        }
+
+        .card-title-en {
+            font-size: 1.3rem;
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .card-title-cn {
+            color: var(--text-muted);
+            font-size: 0.9rem;
+            margin-bottom: 1.2rem;
+            letter-spacing: 0.1em;
+        }
+
+        .card-price {
+            font-size: 1.4rem;
+            font-weight: 700;
+            color: var(--gold-light);
+            margin-bottom: 1.5rem;
+            letter-spacing: 0.05em;
+        }
+
+        .card-btn {
+            width: 100%;
+        }
+
+        /* 特别突出款（Dream Awakening 腕表） */
+        .card.featured {
+            grid-column: span 1;
+            border: 1px solid var(--gold-primary);
+            background: linear-gradient(145deg, rgba(30, 15, 50, 0.8) 0%, rgba(10, 5, 20, 0.9) 100%);
+        }
+
+        @media (min-width: 1100px) {
+            .card.featured {
+                grid-column: span 2;
+                display: flex;
+                gap: 2rem;
+                align-items: center;
+            }
+            .card.featured .card-img-wrapper {
+                height: 480px;
+                flex: 1.2;
+            }
+            .card.featured .card-info {
+                flex: 1;
+                text-align: left;
+                padding-top: 0;
+            }
+        }
+
+        /* ================= 6. 私享对话与品牌誓言 ================= */
+        .brand-philosophy {
+            padding: 6rem 0;
+            background: rgba(19, 10, 36, 0.4);
+            border-top: 1px solid var(--glass-border);
+            border-bottom: 1px solid var(--glass-border);
+            text-align: center;
+        }
+
+        .philosophy-quote {
+            font-size: 1.4rem;
+            line-height: 2;
+            max-width: 850px;
+            margin: 0 auto;
+            font-weight: 300;
+        }
+
+        /* ================= 7. 结账与支付私享弹窗 Modal ================= */
+        .modal-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            background: rgba(5, 2, 10, 0.85);
+            backdrop-filter: blur(15px);
+            z-index: 1000;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity 0.4s ease;
+        }
+
+        .modal-overlay.active {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        .modal-box {
+            background: #110822;
+            border: 1px solid var(--gold-primary);
+            border-radius: 4px;
+            width: 90%;
+            max-width: 650px;
+            padding: 2.5rem;
+            position: relative;
+            box-shadow: 0 20px 50px rgba(0, 0, 0, 0.8), 0 0 40px var(--purple-glow);
+            max-height: 90vh;
+            overflow-y: auto;
+        }
+
+        .modal-close {
+            position: absolute;
+            top: 1.2rem;
+            right: 1.5rem;
+            background: none;
+            border: none;
+            color: var(--text-muted);
+            font-size: 1.8rem;
+            cursor: pointer;
+            transition: color 0.3s;
+        }
+
+        .modal-close:hover {
+            color: var(--gold-light);
+        }
+
+        .modal-title {
+            font-size: 1.5rem;
+            text-align: center;
+            margin-bottom: 0.5rem;
+        }
+
+        .modal-subtitle {
+            text-align: center;
+            font-size: 0.85rem;
+            color: var(--text-muted);
+            margin-bottom: 2rem;
+            letter-spacing: 0.1em;
+        }
+
+        .order-summary {
+            background: rgba(7, 4, 13, 0.6);
+            border: 1px dashed var(--glass-border);
+            padding: 1.2rem;
+            margin-bottom: 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .pay-tabs {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .pay-tab {
+            flex: 1;
+            padding: 0.8rem;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid var(--glass-border);
+            color: var(--text-muted);
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-size: 0.85rem;
+            letter-spacing: 0.1em;
+        }
+
+        .pay-tab.active {
+            background: rgba(147, 51, 234, 0.2);
+            border-color: var(--gold-primary);
+            color: var(--gold-light);
+        }
+
+        .pay-panel {
+            display: none;
+            text-align: center;
+        }
+
+        .pay-panel.active {
+            display: block;
+        }
+
+        .bank-card-box {
+            background: linear-gradient(135deg, #1f113a 0%, #0d051a 100%);
+            border: 1px solid var(--gold-primary);
+            padding: 1.8rem;
+            border-radius: 8px;
+            text-align: left;
+            position: relative;
+        }
+
+        .bank-card-num {
+            font-family: monospace;
+            font-size: 1.5rem;
+            letter-spacing: 0.15em;
+            color: var(--gold-light);
+            margin: 1rem 0;
+            word-break: break-all;
+        }
+
+        .copy-btn {
+            background: var(--gold-primary);
+            color: #000;
+            border: none;
+            padding: 0.4rem 1rem;
+            font-size: 0.75rem;
+            cursor: pointer;
+            font-weight: 600;
+            float: right;
+            border-radius: 2px;
+        }
+
+        .qr-code-img {
+            width: 220px;
+            height: 220px;
+            object-fit: contain;
+            border: 2px solid var(--gold-primary);
+            border-radius: 4px;
+            margin: 1rem auto;
+            display: block;
+            background: #fff;
+        }
+
+        .payment-notice {
+            font-size: 0.8rem;
+            color: var(--text-muted);
+            margin-top: 1.5rem;
+            line-height: 1.6;
+        }
+
+        /* ================= 8. 页脚 Footer ================= */
+        footer {
+            padding: 4rem 0 2rem 0;
+            text-align: center;
+            border-top: 1px solid var(--glass-border);
+            font-size: 0.85rem;
+            color: var(--text-muted);
+        }
+
+        .footer-logo {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .hero-title { font-size: 2.2rem; }
+            .grid { grid-template-columns: 1fr; }
+            .card.featured { grid-column: span 1; flex-direction: column; }
+            .nav-links { display: none; }
+        }
+    </style>
+</head>
+<body>
+
+    <!-- 紫色星空顶 canvas 粒子引擎 -->
+    <canvas id="starfield"></canvas>
+
+    <!-- 顶栏导航 -->
+    <header>
+        <div class="container header-content">
+            <a href="#" class="logo cinzel gold-gradient-text">MAISON ZORIA</a>
+            <ul class="nav-links">
+                <li><a href="#hero">品牌首篇</a></li>
+                <li><a href="#collection">高定臻品</a></li>
+                <li><a href="#philosophy">工坊誓言</a></li>
+            </ul>
+            <a href="#collection" class="gold-border-btn cinzel" style="padding: 0.5rem 1.2rem; font-size: 0.75rem;">私享预约</a>
+        </div>
+    </header>
+
+    <!-- Hero 视觉首屏 -->
+    <section class="hero" id="hero">
+        <div class="container">
+            <span class="hero-badge cinzel">HAUTE HORLOGERIE & MAROQUINERIE</span>
+            <h1 class="hero-title cinzel gold-gradient-text">凝结时光之华<br>极尽星空之美</h1>
+            <p class="hero-subtitle">Maison Zoria 铭兹世家 · 顶级珠宝腕表与私人高定皮具</p>
+            <a href="#collection" class="gold-border-btn cinzel">探索私享系列 (EXPLORE COLLECTION)</a>
+        </div>
+    </section>
+
+    <!-- 臻品展柜 (从仓库读取图像) -->
+    <section class="collection-section" id="collection">
+        <div class="container">
+            <div class="section-header">
+                <h2 class="section-title cinzel gold-gradient-text">THE MASTERPIECE COLLECTION</h2>
+                <p class="section-desc">每一件作品皆为独一无二的世家艺术，静候有缘藏家</p>
+            </div>
+
+            <div class="grid">
+                
+                <!-- 1. 顶级孤品腕表 Dream Awakening (重点展示) -->
+                <div class="card featured">
+                    <div class="card-img-wrapper">
+                        <span class="card-tag cinzel">1/1 PIECE UNIQUE</span>
+                        <img src="Dream Awakening.png" alt="Dream Awakening 顶级珠宝腕表" onerror="this.src='Dream Awakening.jpg'">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title-en cinzel gold-gradient-text">Dream Awakening</div>
+                        <div class="card-title-cn">梦醒时分 · 顶级珠宝高定腕表</div>
+                        <p style="font-size: 0.85rem; color: var(--text-muted); margin-bottom: 1.5rem; line-height: 1.6;">
+                            全表密集镶嵌顶级明亮式切割天然钻石，18K黄金与铂金交织连结。天然虹光珍珠母贝表盘，搭载瑞士超薄复杂机械机芯。
+                        </p>
+                        <div class="card-price cinzel">¥ 3,000,000 CNY</div>
+                        <button class="gold-border-btn card-btn cinzel" onclick="openCheckout('Dream Awakening 梦醒时分 珠宝腕表', '3,000,000')">收藏预约 (ACQUIRE)</button>
+                    </div>
+                </div>
+
+                <!-- 2. Carousel Dreams -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <span class="card-tag cinzel">HAUTE BAG</span>
+                        <img src="Carousel Dreams.jpg" alt="Carousel Dreams 高定包袋">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title-en cinzel">Carousel Dreams</div>
+                        <div class="card-title-cn">梦境旋转木马 · 奢华皮具</div>
+                        <div class="card-price cinzel">¥ 370,000 CNY</div>
+                        <button class="gold-border-btn card-btn cinzel" onclick="openCheckout('Carousel Dreams 梦境旋转木马', '370,000')">私享预定 (ACQUIRE)</button>
+                    </div>
+                </div>
+
+                <!-- 3. Cloud Bloom -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <span class="card-tag cinzel">HAUTE BAG</span>
+                        <img src="Cloud Bloom.jpg" alt="Cloud Bloom 高定包袋">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title-en cinzel">Cloud Bloom</div>
+                        <div class="card-title-cn">云舒双阙 · 高定手袋</div>
+                        <div class="card-price cinzel">¥ 290,000 CNY</div>
+                        <button class="gold-border-btn card-btn cinzel" onclick="openCheckout('Cloud Bloom 云舒双阙', '290,000')">私享预定 (ACQUIRE)</button>
+                    </div>
+                </div>
+
+                <!-- 4. Aurora Castle -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <span class="card-tag cinzel">HAUTE BAG</span>
+                        <img src="Aurora Castle.jpg" alt="Aurora Castle 高定包袋">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title-en cinzel">Aurora Castle</div>
+                        <div class="card-title-cn">白堡星梦 · 高定手袋</div>
+                        <div class="card-price cinzel">¥ 230,000 CNY</div>
+                        <button class="gold-border-btn card-btn cinzel" onclick="openCheckout('Aurora Castle 白堡星梦', '230,000')">私享预定 (ACQUIRE)</button>
+                    </div>
+                </div>
+
+                <!-- 5. Nocturnal Cure -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <span class="card-tag cinzel">HAUTE BAG</span>
+                        <img src="Nocturnal Cure.jpg" alt="Nocturnal Cure 高定包袋">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title-en cinzel">Nocturnal Cure</div>
+                        <div class="card-title-cn">夜色疗愈 · 典藏皮具</div>
+                        <div class="card-price cinzel">¥ 210,000 CNY</div>
+                        <button class="gold-border-btn card-btn cinzel" onclick="openCheckout('Nocturnal Cure 夜色疗愈', '210,000')">私享预定 (ACQUIRE)</button>
+                    </div>
+                </div>
+
+                <!-- 6. Lunar Cove Cat -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <span class="card-tag cinzel">HAUTE BAG</span>
+                        <img src="Lunar Cove Cat Bag.jpg" alt="Lunar Cove Cat Bag 高定包袋">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title-en cinzel">Lunar Cove Cat</div>
+                        <div class="card-title-cn">月湾灵猫 · 高定手袋</div>
+                        <div class="card-price cinzel">¥ 186,000 CNY</div>
+                        <button class="gold-border-btn card-btn cinzel" onclick="openCheckout('Lunar Cove Cat 月湾灵猫', '186,000')">私享预定 (ACQUIRE)</button>
+                    </div>
+                </div>
+
+                <!-- 7. Lunar Nova -->
+                <div class="card">
+                    <div class="card-img-wrapper">
+                        <span class="card-tag cinzel">HAUTE BAG</span>
+                        <img src="Lunar Nova.png" alt="Lunar Nova 高定包袋" onerror="this.src='Lunar Nova.jpg'">
+                    </div>
+                    <div class="card-info">
+                        <div class="card-title-en cinzel">Lunar Nova</div>
+                        <div class="card-title-cn">新月星芒 · 典藏手袋</div>
+                        <div class="card-price cinzel">¥ 120,000 CNY</div>
+                        <button class="gold-border-btn card-btn cinzel" onclick="openCheckout('Lunar Nova 新月星芒', '120,000')">私享预定 (ACQUIRE)</button>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
+
+    <!-- 品牌哲理誓言 -->
+    <section class="brand-philosophy" id="philosophy">
+        <div class="container">
+            <p class="philosophy-quote">
+                “真正的奢华，从不需要喧哗与迎合。<br>
+                Maison Zoria 仅以不可复制的手工造诣与极罕宝石，封存代际传承的品味。”
+            </p>
+        </div>
+    </section>
+
+    <!-- 页脚 -->
+    <footer>
+        <div class="container">
+            <div class="footer-logo cinzel gold-gradient-text">MAISON ZORIA</div>
+            <p style="letter-spacing: 0.15em; margin-bottom: 1rem;">铭兹世家 · 高级制表与高定皮具工坊</p>
+            <p style="font-size: 0.75rem; color: #665b7a;">&copy; 2026 MAISON ZORIA. ALL RIGHTS RESERVED. PRIVATE ATELIER COLLECTION.</p>
+        </div>
+    </footer>
+
+    <!-- 9. 支付与专享结账弹窗 Modal -->
+    <div class="modal-overlay" id="checkoutModal">
+        <div class="modal-box">
+            <button class="modal-close" onclick="closeCheckout()">&times;</button>
+            <h3 class="modal-title cinzel gold-gradient-text">VIP PRIVATE CHECKOUT</h3>
+            <div class="modal-subtitle">Maison Zoria 私享尊贵结算通道</div>
+
+            <div class="order-summary">
+                <div>
+                    <div id="modalItemName" style="font-weight: 600; color: var(--gold-light);">选购作品</div>
+                    <div style="font-size: 0.75rem; color: var(--text-muted);">全球专程保价安全送达</div>
+                </div>
+                <div id="modalItemPrice" class="cinzel" style="font-size: 1.3rem; color: var(--gold-primary); font-weight: 700;">
+                    ¥ 0
+                </div>
+            </div>
+
+            <!-- 支付方式切换 Tab -->
+            <div class="pay-tabs">
+                <div class="pay-tab active" onclick="switchPayTab('bank')">银行卡公户/私享电汇</div>
+                <div class="pay-tab" onclick="switchPayTab('wechat')">微信支付 (WeChat)</div>
+                <div class="pay-tab" onclick="switchPayTab('alipay')">支付宝 (Alipay)</div>
+            </div>
+
+            <!-- Panel 1: 银行卡 -->
+            <div class="pay-panel active" id="panel-bank">
+                <div class="bank-card-box">
+                    <button class="copy-btn" onclick="copyCard()">复制卡号</button>
+                    <div style="font-size: 0.8rem; color: var(--text-muted);">收款银行账号 (Card Number)</div>
+                    <div class="bank-card-num" id="cardNum">6217 0019 3004 3294 322</div>
+                    <div style="font-size: 0.85rem; color: var(--text-main);">收款人/账户名称：Maison Zoria 铭兹高定账户</div>
+                </div>
+                <p class="payment-notice">
+                    * 电汇或大额转账完成后，请保留转账凭证。世家私享管家将在确认到账后 2 小时内与您联系，安排专属白手套交付事宜。
+                </p>
+            </div>
+
+            <!-- Panel 2: 微信 -->
+            <div class="pay-panel" id="panel-wechat">
+                <p style="font-size: 0.85rem; color: var(--text-muted);">请使用微信扫描下方二维码完成专享预定</p>
+                <img src="27a4d3769f19dc654be01702cd84a529.jpg" alt="微信收款码" class="qr-code-img">
+                <p class="payment-notice">扫码付款时请备注您的姓名或联系电话</p>
+            </div>
+
+            <!-- Panel 3: 支付宝 -->
+            <div class="pay-panel" id="panel-alipay">
+                <p style="font-size: 0.85rem; color: var(--text-muted);">请使用支付宝扫描下方二维码（支持花呗/分期）</p>
+                <img src="5d5f047b9aadcf79289991b78bd7d85b.jpg" alt="支付宝收款码" class="qr-code-img">
+                <p class="payment-notice">扫码付款时请备注您的姓名或联系电话</p>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- ================= 10. JavaScript 交互逻辑 ================= -->
+    <script>
+        /* 1. 紫色星空顶 (Starlight Canvas Engine) */
+        const canvas = document.getElementById('starfield');
+        const ctx = canvas.getContext('2d');
+        let stars = [];
+
+        function resizeCanvas() {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+        window.addEventListener('resize', resizeCanvas);
+        resizeCanvas();
+
+        class Star {
+            constructor() {
+                this.reset();
+            }
+            reset() {
+                this.x = Math.random() * canvas.width;
+                this.y = Math.random() * canvas.height;
+                this.size = Math.random() * 1.8;
+                this.alpha = Math.random();
+                this.speed = Math.random() * 0.015 + 0.005;
+                // 紫金双色微光
+                this.color = Math.random() > 0.3 ? '#e0c3fc' : '#fbe3b5';
+            }
+            update() {
+                this.alpha += this.speed;
+                if (this.alpha > 1 || this.alpha < 0) {
+                    this.speed = -this.speed;
+                }
+            }
+            draw() {
+                ctx.save();
+                ctx.globalAlpha = Math.abs(this.alpha);
+                ctx.fillStyle = this.color;
+                ctx.shadowBlur = 8;
+                ctx.shadowColor = this.color;
+                ctx.beginPath();
+                ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+                ctx.fill();
+                ctx.restore();
+            }
+        }
+
+        for (let i = 0; i < 150; i++) {
+            stars.push(new Star());
+        }
+
+        function animateStars() {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+            stars.forEach(star => {
+                star.update();
+                star.draw();
+            });
+            requestAnimationFrame(animateStars);
+        }
+        animateStars();
+
+        /* 2. 弹窗与支付交互逻辑 */
+        function openCheckout(name, price) {
+            document.getElementById('modalItemName').innerText = name;
+            document.getElementById('modalItemPrice').innerText = '¥ ' + price + ' CNY';
+            document.getElementById('checkoutModal').classList.add('active');
+        }
+
+        function closeCheckout() {
+            document.getElementById('checkoutModal').classList.remove('active');
+        }
+
+        function switchPayTab(type) {
+            const tabs = document.querySelectorAll('.pay-tab');
+            const panels = document.querySelectorAll('.pay-panel');
+            tabs.forEach(t => t.classList.remove('active'));
+            panels.forEach(p => p.classList.remove('active'));
+
+            if (type === 'bank') {
+                tabs[0].classList.add('active');
+                document.getElementById('panel-bank').classList.add('active');
+            } else if (type === 'wechat') {
+                tabs[1].classList.add('active');
+                document.getElementById('panel-wechat').classList.add('active');
+            } else if (type === 'alipay') {
+                tabs[2].classList.add('active');
+                document.getElementById('panel-alipay').classList.add('active');
+            }
+        }
+
+        function copyCard() {
+            const num = '6217001930043294322';
+            navigator.clipboard.writeText(num).then(() => {
+                alert('银行卡号已成功复制到剪贴板：' + num);
+            }).catch(() => {
+                alert('卡号：' + num);
+            });
+        }
+
+        // 点击遮罩层关闭
+        document.getElementById('checkoutModal').addEventListener('click', function(e) {
+            if (e.target === this) closeCheckout();
+        });
+    </script>
+</body>
+</html>
